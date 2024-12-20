@@ -1,8 +1,8 @@
 package server
 
 import (
-	"Calc/internal/http/handler"
 	"fmt"
+	"github.com/golkity/Calc/internal/http/handler"
 	"net/http"
 )
 

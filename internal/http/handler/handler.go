@@ -1,15 +1,15 @@
 package handler
 
 import (
-	"Calc/pkg/calc"
-	"Calc/pkg/logger"
+	"github.com/golkity/Calc/pkg/calc"
+	//"github.com/golkity/Calc/pkg/logger"
 	"encoding/json"
 	"net/http"
 )
 
-var (
-	lg *logger.Logger
-)
+//var (
+//	lg *logger.Logger
+//)
 
 type Request struct {
 	Expression string `json:"Expression"`
@@ -21,10 +21,10 @@ type Response struct {
 }
 
 func CalcHandler(w http.ResponseWriter, r *http.Request) {
-	lg.Info("Received request:", r.Method, r.URL.Path)
+	//lg.Info("Received request:", r.Method, r.URL.Path)
 
 	if r.Method != http.MethodPost {
-		lg.Info("Invalid method used:", r.Method)
+		//lg.Info("Invalid method used:", r.Method)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusMethodNotAllowed)
 		json.NewEncoder(w).Encode(map[string]string{
@@ -37,7 +37,7 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 		Expression string `json:"expression"`
 	}
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
-		lg.Info("Failed to decode request body:", err)
+		//lg.Info("Failed to decode request body:", err)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(map[string]string{
@@ -46,10 +46,10 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	lg.Debug("Expression received:", req.Expression)
+	//lg.Debug("Expression received:", req.Expression)
 
 	if req.Expression == "" {
-		lg.Info("Empty expression received")
+		//lg.Info("Empty expression received")
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusBadRequest)
 		json.NewEncoder(w).Encode(map[string]string{
@@ -60,7 +60,7 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 
 	result, err := calc.Calc(req.Expression)
 	if err != nil {
-		lg.Info("Calculation error for expression:", req.Expression, "Error:", err)
+		//lg.Info("Calculation error for expression:", req.Expression, "Error:", err)
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusUnprocessableEntity)
 		json.NewEncoder(w).Encode(map[string]string{
@@ -69,7 +69,7 @@ func CalcHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	lg.Info("Calculation successful for expression:", req.Expression, "Result:", result)
+	//lg.Info("Calculation successful for expression:", req.Expression, "Result:", result)
 
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusOK)

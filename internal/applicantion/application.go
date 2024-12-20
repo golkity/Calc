@@ -1,10 +1,10 @@
 package application
 
 import (
-	"Calc/config"
-	"Calc/internal/http/handler"
-	"Calc/pkg/calc"
 	"bufio"
+	"github.com/golkity/Calc/config"
+	"github.com/golkity/Calc/internal/http/handler"
+	"github.com/golkity/Calc/pkg/calc"
 	"log"
 	"net/http"
 	"os"

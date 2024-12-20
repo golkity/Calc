@@ -1,7 +1,7 @@
 package calc
 
 import (
-	"Calc/internal/Errors"
+	"github.com/golkity/Calc/internal/Errors"
 	"strconv"
 	"unicode"
 )

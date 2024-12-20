@@ -1,6 +1,6 @@
 package main
 
-import application "Calc/internal/applicantion"
+import application "github.com/golkity/Calc/internal/applicantion"
 
 func main() {
 	app := application.New("config/config.json")
